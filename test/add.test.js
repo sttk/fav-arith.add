@@ -27,7 +27,7 @@ describe('fav.arith.add', function() {
       var a2 = new ArithNumber(0, 1000, 0);
       var a3 = add(a1, a2);
       expect(a3.numerator).to.equal(0);
-      expect(a3.denominator).to.equal(1000);
+      expect(a3.denominator).to.equal(1);
       expect(a3.exponent).to.equal(0);
       expect(a3.toApproximateString()).to.equal('0');
     });
@@ -237,6 +237,48 @@ describe('fav.arith.add', function() {
       expect(a3.exponent).to.equal(2);
       expect(a3.toApproximateString()).to.equal(
         '3335999723977.77777777777777777777');
+    });
+  });
+
+  describe('Attach the add function to ArithNumber.prototype',
+  function() {
+    it('Should accept a number parameter', function() {
+      var a1 = new ArithNumber(123, 4, 0);
+      var a2 = a1.add(55.5);
+      expect(a2.numerator).to.deep.equal(3450);
+      expect(a2.denominator).to.deep.equal(4);
+      expect(a2.exponent).to.deep.equal(-1);
+      expect(a2.toApproximateString()).to.equal('86.25');
+    });
+
+    it('Should accept a string parameter', function() {
+      var a1 = new ArithNumber(123, 4, 0);
+      var a2 = a1.add('55.5');
+      expect(a2.numerator).to.deep.equal(3450);
+      expect(a2.denominator).to.deep.equal(4);
+      expect(a2.exponent).to.deep.equal(-1);
+      expect(a2.toApproximateString()).to.equal('86.25');
+
+      var a3 = a1.add('555e-1');
+      expect(a3.numerator).to.deep.equal(3450);
+      expect(a3.denominator).to.deep.equal(4);
+      expect(a3.exponent).to.deep.equal(-1);
+      expect(a3.toApproximateString()).to.equal('86.25');
+    });
+
+    it('Should accept an ArithNumber parameter', function() {
+      var a1 = new ArithNumber(123, 4, 0);
+      var a2 = a1.add(new ArithNumber(555, 1, -1));
+      expect(a2.numerator).to.deep.equal(3450);
+      expect(a2.denominator).to.deep.equal(4);
+      expect(a2.exponent).to.deep.equal(-1);
+      expect(a2.toApproximateString()).to.equal('86.25');
+
+      var a3 = a1.add(new ArithNumber(555, 10, 0));
+      expect(a3.numerator).to.deep.equal(1725);
+      expect(a3.denominator).to.deep.equal(20);
+      expect(a3.exponent).to.deep.equal(0);
+      expect(a3.toApproximateString()).to.equal('86.25');
     });
   });
 });

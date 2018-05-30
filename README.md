@@ -26,31 +26,52 @@ For Node.js:
 var ArithNumber = require('@fav/arith.number');
 var add = require('@fav/arith.add');
 
-var num1 = ArithNumber.of(1.23) // => { numerator: 123, denominator: 1, exponent: -2 }
+var num1 = ArithNumber.of(1.23);
+// => { numerator: 123, denominator: 1, exponent: -2 }
 
-var num2 = ArithNumber.of('4.56') // => { numerator: 456, denominator: 1, exponent: -2 }
+var num2 = ArithNumber.of('4.56');
+// => { numerator: 456, denominator: 1, exponent: -2 }
 
-1.23 + 4.56 // => 5.789999999999999
+1.23 + 4.56;
+// => 5.789999999999999
 
-var num3 = add(num1, num2) // => { numerator: 579, denominator: 1, exponent: -2 }
-num3.toApproximateString() // => '5.79'
+var num3 = add(num1, num2);
+// => { numerator: 579, denominator: 1, exponent: -2 }
+num3.toApproximateString(); // => '5.79'
+
+var num4 = num1.add(num2);
+// => { numerator: 579, denominator: 1, exponent: -2 }
+num4.toApproximateString();
+// => '5.79'
 ```
 
 For Web browsers:
 
 ```html
 <script src="fav.arith.number.min.js"></script>
+<script src="fav.arith.add.min.js"></script>
 <script>
 var ArithNumber = fav.arith.number;
+var add = fav.arith.add;
 
-var num1 = ArithNumber.of(1.23) // => { numerator: 123, denominator: 1, exponent: -2 }
+var num1 = ArithNumber.of(1.23);
+// => { numerator: 123, denominator: 1, exponent: -2 }
 
-var num2 = ArithNumber.of('4.56') // => { numerator: 456, denominator: 1, exponent: -2 }
+var num2 = ArithNumber.of('4.56');
+// => { numerator: 456, denominator: 1, exponent: -2 }
 
-1.23 + 4.56 // => 5.789999999999999
+1.23 + 4.56;
+// => 5.789999999999999
 
-var num3 = add(num1, num2) // => { numerator: 579, denominator: 1, exponent: -2 }
-num3.toApproximateString() // => '5.79'
+var num3 = add(num1, num2);
+// => { numerator: 579, denominator: 1, exponent: -2 }
+num3.toApproximateString();
+// => '5.79'
+
+var num4 = num1.add(num2);
+// => { numerator: 579, denominator: 1, exponent: -2 }
+num4.toApproximateString();
+// => '5.79'
 </script>
 ```
 
@@ -70,12 +91,31 @@ Adds *arithNum1* and *arithNum2* and create a new ArithNumber object which has t
 
 #### Returns:
 
-The sum of two values of ArithNumber objects. 
+A new ArithNumber object having the sum of two numbers.
 
 **Type:** ArithNumber
 
-## Checked                                                                      
 
+### <u>ArithNumber.prototype.add(num) : ArithNumber</u>
+
+This package attaches `add` function to ArithNumber's prototype as its method.
+
+This method adds a parameter *num* of which is either a number, a string or an ArithNumber object to the value of this ArithNumber object itself, and returns a new ArithNumber object having this added value.
+
+#### Parameters:
+
+| Parameter   |  Type           | Description                               |
+|:------------|:---------------:|:------------------------------------------|
+| *num*       | number &#124; string &#124; ArithNumber | A number, a string, or an ArithNumber to be added. |
+
+#### Returns:
+
+A new ArithNumber object having the sum of two numbers.
+
+**Type:** ArithNumber
+
+## Checked
+                                                                   
 ### Node.js (4〜)
 
 | Platform  |   4    |   5    |   6    |   7    |   8    |   9    |   10   |

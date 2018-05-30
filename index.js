@@ -35,8 +35,18 @@ function add(arithNum1, arithNum2) {
   }
 }
 
-module.exports = function(arithNum1, arithNum2) {
+function addConsideringLargeNumbers(arithNum1, arithNum2) {
   return add(arithNum1, arithNum2) ||
          add(reduce(arithNum1), reduce(arithNum2)) ||
          new ArithNumber(NaN, NaN, NaN);
+}
+
+ArithNumber.prototype.add = function(num) {
+  if (num instanceof ArithNumber) {
+    return addConsideringLargeNumbers(this, num);
+  } else {
+    return addConsideringLargeNumbers(this, ArithNumber.of(num));
+  }
 };
+
+module.exports = addConsideringLargeNumbers;

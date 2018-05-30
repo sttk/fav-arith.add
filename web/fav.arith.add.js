@@ -37,11 +37,21 @@ function add(arithNum1, arithNum2) {
   }
 }
 
-module.exports = function(arithNum1, arithNum2) {
+function addConsideringLargeNumbers(arithNum1, arithNum2) {
   return add(arithNum1, arithNum2) ||
          add(reduce(arithNum1), reduce(arithNum2)) ||
          new ArithNumber(NaN, NaN, NaN);
+}
+
+ArithNumber.prototype.add = function(num) {
+  if (num instanceof ArithNumber) {
+    return addConsideringLargeNumbers(this, num);
+  } else {
+    return addConsideringLargeNumbers(this, ArithNumber.of(num));
+  }
 };
+
+module.exports = addConsideringLargeNumbers;
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"@fav/arith.reduce":2,"@fav/math.gcd":3}],2:[function(require,module,exports){
@@ -82,6 +92,10 @@ function reduce(arithNum) {
 
   return new ArithNumber(n, d, e);
 }
+
+ArithNumber.prototype.reduce = function() {
+  return reduce(this);
+};
 
 module.exports = reduce;
 
